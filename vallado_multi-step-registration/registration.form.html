@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>	
+	<head>	
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Registration Form</title>
+        <!-- Stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap" rel="stylesheet">
+        <link rel="stylesheet" id="css-bootstrap" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" id="css-bootstrap" href="assets/css/custom.css">
+        <link rel="stylesheet" id="css-bootstrap" href="assets/css/loader.css">
+        <!-- END Stylesheets -->
+	</head>
+	<body class="green-gradient-bg" style="background: ;">
+        <!-- Loader -->
+        <div id="loader-wrapper" style="display:none;">
+            <h1 id="loaderLabel" class="text-center text-green upper-case-bold" >Trinity University of Asia</h1>
+            <div id="loader" class="mx-auto mt-5 text-center">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>  
+        </div>
+        <!-- Success Page -->
+        <div id="successPage" class="col-md-12 py-5 animate-bottom" style="display:none;">
+          <div class="col-md-8 p-5 mx-auto mt-5 white-box">
+            <h3 class="text-center text-green upper-case-bold mb-5">Student Application Success</h3>
+            <p class="text-muted" style="line-height: 2em;">Cheers, Trinitian aspirant! You have successfully applied to Trinity University of Asia. For your future reference, please take note of your application number found below.</p>
+
+            <div class="col-md remove-padding mb-3 text-center">
+                <div id="applicationNumber" class="mx-auto my-5 px-3 boxed-display h1">2019300001</div>
+            </div>
+          </div>
+        </div>
+        <!-- Application Form -->
+        <div id="applicationForm" class="col-md-12 py-5" onload="formSteps()">
+            <div id="steps" class="" style="text-align:center;margin-top:40px;"></div>
+            <form id="registerForm" class="row mx-0 my-5 form simple-form" style="background: transparent;">
+                <div class="col-md-8 p-5 mx-auto white-box">
+                    <!-- TAB 1 -->
+                    <div class="col-md-12 remove-padding mx-auto tab"> 
+                        <h3 class="text-center text-green upper-case-bold mb-3">Create Account</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md-12 remove-padding mb-3 mr-4">
+                                    <label class="d-block">Email Address</label>
+                                    <input class="col-md email" type="text">
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="d-block">Contact Number</label>
+                                    <input class="col-md number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">                        
+                                <div class="col-md remove-padding mb-3 mr-4">
+                                    <label class="d-block">Password</label>
+                                    <input id="password" class="col-md password" type="password" name="password"id="" >
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Confirm Password</label>
+                                    <input id="confirm" class="col-md password" type="password" name="confirm"id="" >
+                                </div>   
+                            </div>       
+                        </div>
+                    </div>
+                    <!-- TAB 2 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Select Preffered Course</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="d-block">Student Level</label>
+                                    <select id="studentLevel" class="col-md" onchange="getStudentLevel()">
+                                        <option value="jhs">Junior High</option>
+                                        <option value="shs">Senior High</option>
+                                        <option value="college">College</option>
+                                        <option value="gradschool">Graduate School</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3 boxed-input">
+                                    <div class="row remove-margin">
+                                        <input id="full-time" type="radio" name="studentType" value="full-time" style="height: fit-content !important;" checked="checked">
+                                        <label for="full-time" class="col-md text-center pointer">Full-time Student</label>
+                                        &nbsp; &nbsp; 
+                                        <input id="working" type="radio" name="studentType" value="working" style="height: fit-content !important;">
+                                        <label for="working" class="col-md text-center pointer">Working Student</label>                                 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">                        
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <div class="row remove-margin">
+                                        <label class="col-md-1">1<sup>st</sup></label>
+                                        <select id="firstChoice" class="col-md select-choices" type="text"></select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3 non-jhs-field">
+                                    <div class="row remove-margin">                            
+                                        <label class="col-md-1">2<sup>nd</sup></label>
+                                        <select id="secondChoice" class="col-md select-choices non-jhs-field" type="text"></select>
+                                    </div>
+                                </div>  
+                                <div class="col-md-12 remove-padding mb-3 non-jhs-field">
+                                    <div class="row remove-margin">
+                                        <label class="col-md-1">3<sup>rd</sup></label>
+                                        <select id="thirdChoice" class="col-md select-choices non-jhs-field" type="text"></select>
+                                    </div>
+                                </div>  
+                            </div> 
+                            <div class="row remove-margin mb-4 boxed-input">
+                                <p class="col-md-12 remove-padding" style="font-size: 14px; font-weight: bold;">Are you applying as a foreign student?</p>
+                                <input id="notForeign" type="radio" name="isForeignStudent" value="false" onclick="foreignStudent()" style="height: fit-content !important;" checked="checked">
+                                <label for="notForeign" class="col-md text-center pointer">No, I am not</label> 
+                                &nbsp; &nbsp;
+                                <input id="foreign" type="radio" name="isForeignStudent" value="true" onclick="foreignStudent()" style="height: fit-content !important;">
+                                <label for="foreign" class="col-md text-center pointer">Yes, I am</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TAB 3 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold my-3">Personal Information</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">First Name</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-3">
+                                    <label class="d-block">Middle Name</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Last Name</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mb-3 mr-4">
+                                    <label class="d-block">Civil Status</label>
+                                    <select id="select-civil-status" class="col-md"></select>
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Nationality</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">                        
+                                <div class="col-md remove-padding mb-3 mr-4">
+                                    <label class="d-block">Gender</label>
+                                    <select id="select-gender" class="col-md"></select>
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Religion</label>
+                                    <input class="col-md" type="text">
+                                </div>                        
+                            </div>
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mr-4">
+                                    <label class="d-block">Birth Date</label>
+                                    <input class="col-md" type="date">
+                                </div>
+                                <div class="col-md remove-padding">
+                                    <label class="d-block">Birth Place</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TAB 4 -->
+                    <div class="col-md-12 remove-padding mx-auto tab foreign-student-details">
+                        <h3 class="text-center text-green upper-case-bold my-3">Foreign Student Details</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mb-3 mr-4">
+                                    <label class="d-block">Visa Status</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Authorized Stay</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">                        
+                                <div class="col-md remove-padding mb-3 mr-4">
+                                    <label class="d-block">Passport Number</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">ACR I-Card No.</label>
+                                    <input class="col-md" type="text">
+                                </div>                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TAB 5 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Family Background</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4 non-gradschool-field">
+                                <div class="col-md-6 remove-padding mb-3">
+                                    <label class="d-block">Name of Father</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-4">
+                                    <label class="d-block">Occupation</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Contact Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4 non-gradschool-field">
+                                <div class="col-md-6 remove-padding mb-3">
+                                    <label class="d-block">Name of Mother</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-4">
+                                    <label class="d-block">Occupation</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Contact Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4 non-gradschool-field">
+                                <div class="col-md-6 remove-padding mb-3">
+                                    <label class="d-block">Name of Guardian</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-4">
+                                    <label class="d-block">Relationship</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Contact Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4 gradschool-field">
+                                <div class="col-md-6 remove-padding mb-3">
+                                    <label class="d-block">Name of Spouse</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-4">
+                                    <label class="d-block">Occupation</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Contact Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TAB 6 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Address Information</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md-8 remove-padding mb-3 mr-4">
+                                    <label class="d-block">City Address</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Telephone Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md-8 remove-padding mb-3 mr-4">
+                                    <label class="d-block">Provincial Address</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Telephone Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4 non-gradschool-field">
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="d-block">Guardian's Address</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                            </div>
+                            <div class="row remove-margin mb-4 gradschool-field">
+                                <div class="col-md-8 remove-padding mb-3 mr-4">
+                                    <label class="d-block">Office Address</label>
+                                    <input class="col-md optional" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Telephone Number</label>
+                                    <input class="col-md optional number" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TAB 7 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Educational Background</h3>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <h5 class="col-md-12 remove-padding">Elementary</h5>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">School</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-3">
+                                    <label class="d-block">Location</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Year Completed</label>
+                                    <input class="col-md number" type="text">
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="">
+                                        <input type="radio" name="elemSchoolClassification" value="private" style="height: fit-content !important;" checked="checked">&nbsp;Private 
+                                    </label>
+                                    &nbsp; &nbsp; 
+                                    <label class="">
+                                        <input type="radio" name="elemSchoolClassification" value="public" style="height: fit-content !important;">&nbsp;Public
+                                    </label>
+                                </div>
+                            </div>   
+                            <div class="row remove-margin mb-4">
+                                <h5 class="col-md-12 remove-padding">High School</h5>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">School</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-3">
+                                    <label class="d-block">Location</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Year Completed</label>
+                                    <input class="col-md number" type="text">
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="">
+                                        <input type="radio" name="highSchoolClassification" value="private" style="height: fit-content !important;" checked="checked">&nbsp;Private 
+                                    </label>
+                                    &nbsp; &nbsp; 
+                                    <label class="">
+                                        <input type="radio" name="highSchoolClassification" value="public" style="height: fit-content !important;">&nbsp;Public
+                                    </label>
+                                </div>
+                            </div>  
+                            <div class="row remove-margin mb-4 gradschool-field">
+                                <h5 class="col-md-12 remove-padding">College</h5>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">School</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3 mx-3">
+                                    <label class="d-block">Location</label>
+                                    <input class="col-md" type="text">
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="d-block">Year Completed</label>
+                                    <input class="col-md number" type="text">
+                                </div>
+                                <div class="col-md-12 remove-padding mb-3">
+                                    <label class="">
+                                        <input type="radio" name="collegeSchoolClassification" value="private" style="height: fit-content !important;" checked="checked">&nbsp;Private 
+                                    </label>
+                                    &nbsp; &nbsp; 
+                                    <label class="">
+                                        <input type="radio" name="collegeSchoolClassification" value="public" style="height: fit-content !important;">&nbsp;Public
+                                    </label>
+                                </div>
+                            </div>                  
+                        </div>
+                    </div>
+                    <!-- TAB 8 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">How did you find out about Trinity University of Asia</h3>
+                        <p class="text-center text-muted">Please check all true answers</p>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Alumni" style="height: fit-content !important;">&nbsp;Alumni
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Brochures/Flyers" style="height: fit-content !important;">&nbsp;Brochures/Flyers 
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Bulletin Board" style="height: fit-content !important;">&nbsp;Bulletin Board 
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Career Fair/Exhibit" style="height: fit-content !important;">&nbsp;Career Fair/Exhibit 
+                                    </label> 
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Convincing Career Talk" style="height: fit-content !important;">&nbsp;Convincing Career Talk 
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Friends" style="height: fit-content !important;">&nbsp;Friends 
+                                    </label>
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Parent/Relatives" style="height: fit-content !important;">&nbsp;Parent/Relatives
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Internet" style="height: fit-content !important;">&nbsp;Internet
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Newsprint/Published Article" style="height: fit-content !important;">&nbsp;Newsprint/Published Article 
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Radio/Television" style="height: fit-content !important;">&nbsp;Radio/Television
+                                    </label> 
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="School Banner/Tarpaulin" style="height: fit-content !important;">&nbsp;School Banner/Tarpaulin
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Student from Trinity" style="height: fit-content !important;">&nbsp;Student from Trinity
+                                    </label>
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Trinity Website" style="height: fit-content !important;">&nbsp;Trinity Website
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Varsity Team" style="height: fit-content !important;">&nbsp;Varsity Team
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Video Presentation" style="height: fit-content !important;">&nbsp;Video Presentation
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Telephone Directory" style="height: fit-content !important;">&nbsp;Telephone Directory
+                                    </label> 
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Telephone Marketing" style="height: fit-content !important;">&nbsp;Telephone Marketing
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Others" style="height: fit-content !important;">&nbsp;Others 
+                                    </label>
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                    <!-- TAB 9 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Why did you choose to apply with Trinity</h3>
+                        <p class="text-center text-muted">Please check all true answers</p>
+                        <div class="mx-auto my-5 px-3">
+                            <div class="row remove-margin mb-4">
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Parents' Choice" style="height: fit-content !important;">&nbsp;Parents' Choice
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Friends are enrolled at Trinity" style="height: fit-content !important;">&nbsp;Friends are enrolled at Trinity
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Relatives' influence" style="height: fit-content !important;">&nbsp;Relatives' influence 
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Available Scholarship Grants" style="height: fit-content !important;">&nbsp;Available Scholarship Grants
+                                    </label> 
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Known to produce top graduates" style="height: fit-content !important;">&nbsp;Known to produce top graduates
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Well known and reputable institution" style="height: fit-content !important;">&nbsp;Well known and reputable institution
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Good Performance in Licensure Exams" style="height: fit-content !important;">&nbsp;Good Performance in Licensure Exams
+                                    </label>
+                                </div>
+                                <div class="col-md remove-padding mb-3">
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Safe and Secure Campus/Environment" style="height: fit-content !important;">&nbsp;Safe and Secure Campus/Environment
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Accessible to public transportation" style="height: fit-content !important;">&nbsp;Accessible to public transportation
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Visited Trinity and was impressed with the modern facilities" style="height: fit-content !important;">&nbsp;Visited Trinity and was impressed with the modern facilities
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Proximity/Nearness to residence" style="height: fit-content !important;">&nbsp;Proximity/Nearness to residence
+                                    </label> 
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Moderately priced enrollment" style="height: fit-content !important;">&nbsp;Moderately priced enrollment
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Advanced Technology Resource" style="height: fit-content !important;">&nbsp;Advanced Technology Resource
+                                    </label>
+                                    <label class="col-md-12">
+                                        <input type="checkbox" name="howFoundVal" value="Others" style="height: fit-content !important;">&nbsp;Others 
+                                    </label>
+                                </div>
+                            </div>                    
+                        </div>
+                    </div>
+                    <!-- TAB 9 -->
+                    <div class="col-md-12 remove-padding mx-auto tab">
+                        <h3 class="text-center text-green upper-case-bold mb-3">Student Consent Form</h3>
+                        <p class="text-center text-muted remove-margin">Before submitting, please read the student consent form</p>
+                        <div class="col-md remove-padding mb-3 text-center">
+                            <div class="mx-auto my-5 px-3 boxed pointer h3" data-toggle="modal" data-target="#consentFormModal" onClick="formViewed()">View Student Consent Form</div>
+                            <label class="col-md-12 text-muted">
+                                <input type="checkbox" id="student-consent" class="student-consent" name="studentConsent" style="height: fit-content !important;" onclick="enableSubmitBtn()">&nbsp;I accept the terms and conditons of the student consent form.
+                            </label>
+                        </div>
+                    </div>                
+                    <div class="col-md-12 py-0 px-3 mx-auto mt-5 text-right">
+                        <button id="prev" class="btn" onclick="nextTab(-1); return false">Previous</button>
+                        <button id="next" class="btn btn-lgreen" onclick="nextTab(1); return false">Next</button>
+                    </div>
+                </div>
+            </form>             
+        </div>	
+    <!-- JS Code -->
+    <!-- JS: jQuery & Bootstrap Related -->
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>	
+    <!-- JS: Custom Javascript -->
+    <script src="assets/js/multistep-form.js"></script> 
+    <script src="assets/js/submit-form.js"></script>	
+    <script src="assets/js/dynamic-fields.js"></script> 
+	</body>
+</html>
+<!-- Modal -->
+<div class="modal fade" id="consentFormModal" tabindex="-1" role="dialog" aria-labelledby="consentFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-green upper-case-bold" id="consentFormModalLabel">Student Consent Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-lgreen student-consent" onclick="closeModal()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
